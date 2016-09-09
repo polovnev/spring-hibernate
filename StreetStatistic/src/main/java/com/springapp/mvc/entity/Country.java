@@ -1,10 +1,11 @@
-package com.springapp.mvc.dao;
+package com.springapp.mvc.entity;
 
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
+
 import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.*;
 
 @Entity
 @Table(name="country")

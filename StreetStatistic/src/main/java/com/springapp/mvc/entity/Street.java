@@ -1,8 +1,9 @@
-package com.springapp.mvc.dao;
+package com.springapp.mvc.entity;
 
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.*;
 import java.io.Serializable;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name="street")
@@ -24,7 +25,7 @@ public class Street implements Serializable{
     }
 
     @ManyToOne
-    @JoinColumn(name="city_id")
+    @JoinColumn(name="city_ref")
     public City getCity() {
         return city;
     }
@@ -34,7 +35,7 @@ public class Street implements Serializable{
     }
 
     @ManyToOne
-    @JoinColumn(name="street_name_info_id")
+    @JoinColumn(name="street_name_info_ref")
     public StreetName getStreetName() {
         return streetName;
     }

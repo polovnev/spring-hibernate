@@ -1,9 +1,10 @@
-package com.springapp.mvc.dao;
+package com.springapp.mvc.entity;
 
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name="city")
@@ -35,7 +36,7 @@ public class City implements Serializable{
     }
 
     @ManyToOne
-    @JoinColumn(name="contact_id")
+    @JoinColumn(name="country_ref")
     public Country getCountry() {
         return country;
     }

@@ -1,13 +1,14 @@
-package com.springapp.mvc.dao;
+package com.springapp.mvc.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
+
 import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.*;
 
 
 @Entity
-@Table(name="city")
+@Table(name="street_name_info")
 public class StreetName implements Serializable{
 
     private int id;
@@ -41,8 +42,8 @@ public class StreetName implements Serializable{
         return isPerson;
     }
 
-    public void setPerson(boolean person) {
-        isPerson = (person)? 1 : 0;
+    public void setPerson(int person) {
+        isPerson = person;
     }
 
     @Column(name="description")
