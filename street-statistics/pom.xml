@@ -131,13 +131,19 @@
     </dependencies>
 
     <build>
-        <finalName>StreetStatistic</finalName>
+        <finalName>street-statistics</finalName>
         <plugins>
-            <plugin>
+             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                    </archive>
+
                 </configuration>
             </plugin>
             <plugin>
