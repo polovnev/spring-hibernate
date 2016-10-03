@@ -26,4 +26,22 @@ public class ComplexQueryDaoImpl extends AbstractDaoImpl implements ComplexQuery
         return list.get(0);
     }
 
+    @Override
+    public City showCityThisBiggerstPopulation(int countryId) {
+        String hql = "SELECT C FROM City C WHERE C.country.id = :countryId ORDER BY C.population DESC";
+        Query query = getSession().createQuery(hql);
+        query.setParameter("countryId", countryId);
+        List<City> list = query.list();
+        return list.get(0);
+    }
+
+    @Override
+    public City showCityThisSmallestPopulation(int countryId) {
+        String hql = "SELECT C FROM City C WHERE C.country.id = :countryId ORDER BY C.population";
+        Query query = getSession().createQuery(hql);
+        query.setParameter("countryId", countryId);
+        List<City> list = query.list();
+        return list.get(0);
+    }
+
 }

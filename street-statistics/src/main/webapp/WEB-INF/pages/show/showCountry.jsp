@@ -6,11 +6,12 @@
     <title>Countries</title>
 </head>
 <body>
-<my:menu/>
+<my:header></my:header>
 <c:forEach items="${countries}" var="country">
-    <a href="/show/cities?idCountry=${country.id}"><h1>${country.name}</h1></a>
+    <a href="/city/show?idCountry=${country.id}"><h1>${country.name}</h1></a>
+    <input type="radio" name="country" value="${country.id}">
     <hr/>
-    <a href="/remove/country?id=${country.id}">remove</a> <a href="/update/country?id=${country.id}">change</a>
+    <a href="/country/remove?id=${country.id}">remove</a> <a href="/country/update?id=${country.id}">change</a>
     <hr/>
 </c:forEach>
 </body>

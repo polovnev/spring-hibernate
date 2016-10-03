@@ -1,14 +1,30 @@
 <%@ tag body-content="tagdependent" %>
-<%@ attribute name="idCountry" required="true" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>
-    $(document).ready(function(){
+<div style="padding-left: 200px">
+    City with the biggest length streets: <i id="sumLongestStreet"> </i><br>
+    City with the biggest population: <i id="biggestPopulation"> </i><br>
+    City with the smallest population: <i id="smallestPopulation"> </i><br>
 
-        $("button").click(function() {
-            $.get("/goodResult?idCountry=${idCountry}", function(data){
-                $("<span>data<span>").insertAfter(this);
-                alert(data);
-            });
+    </br>
+    <button id="send">send request</button>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#send").click(function () {
+            id = $("input:radio:checked").val();
+            if (id == undefined) {
+                alert("country not checked");
+            } else {
+                $.get("/sumLongestStreet?idCountry=" + id, function (data) {
+                    $("#sumLongestStreet").text(data);
+                });
+                $.get("/biggestPopulation?idCountry=" + id, function (data) {
+                    $("#biggestPopulation").text(data);
+                });
+                $.get("/smallestPopulation?idCountry=" + id, function (data) {
+                    $("#smallestPopulation").text(data);
+                });
+            }
         });
     });
 </script>

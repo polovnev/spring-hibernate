@@ -10,7 +10,7 @@
 <c:forEach items="${streets}" var="street">
     <h1>${street.length}</h1>
     <hr/>
-    <a href="/remove/street?id=${street.id}">remove</a> <a href="/update/street?id=${street.id}">change</a>
+    <a href="/street/remove?id=${street.id}">remove</a> <a href="/street/update?id=${street.id}">change</a>
     <hr/>
 </c:forEach>
 </body>

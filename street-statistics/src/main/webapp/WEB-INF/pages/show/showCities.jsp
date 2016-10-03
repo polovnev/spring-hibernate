@@ -8,9 +8,9 @@
 <body>
 <my:menu/>
 <c:forEach items="${cities}" var="city">
-    <a href="/show/streets?idCity=${city.id}"><h1>${city.name}</h1></a>
+    <a href="/street/show?idCity=${city.id}"><h1>${city.name}</h1></a>
     <hr/>
-    <a href="/remove/city?id=${city.id}">remove</a> <a href="/update/city?id=${city.id}">change</a>
+    <a href="/city/remove?id=${city.id}">remove</a> <a href="/city/update?id=${city.id}">change</a>
     <hr/>
 </c:forEach>
 </body>

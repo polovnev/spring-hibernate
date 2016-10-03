@@ -6,7 +6,7 @@
 </head>
 <body>
 <my:menu/>
-<form method="post" action="/update/country">
+<form method="post" action="/country/update">
     <input type="hidden" name="id" value="${country.id}">
     <table>
 

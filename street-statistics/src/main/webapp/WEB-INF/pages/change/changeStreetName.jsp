@@ -8,7 +8,7 @@
 </head>
 <body>
 <my:menu/>
-<form method="post" action="/update/streetName">
+<form method="post" action="/streetNameInfo/update">
     <input type="hidden" name="id" value="${streetName.id}"/>
     <table>
         <tr>

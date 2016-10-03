@@ -7,7 +7,7 @@
 </head>
 <body>
 <my:menu/>
-<form method="post" action="/add/street">
+<form method="post" action="/street/add">
     <table>
         <tr>
             <td>City:</td>

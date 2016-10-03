@@ -8,7 +8,7 @@
 </head>
 <body>
 <my:menu/>
-<form method="post" action="/add/city">
+<form method="post" action="/city/add">
 
     <table>
         <tr>

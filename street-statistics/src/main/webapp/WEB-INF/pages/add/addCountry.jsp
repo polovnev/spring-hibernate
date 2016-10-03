@@ -6,7 +6,7 @@
 </head>
 <body>
 <my:menu/>
-<form method="post" action="/add/country">
+<form method="post" action="/country/add">
     <table>
         <tr>
             <td>Country name:</td>

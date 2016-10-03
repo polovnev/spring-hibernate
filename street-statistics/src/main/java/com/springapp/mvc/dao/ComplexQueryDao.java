@@ -6,4 +6,8 @@ public interface ComplexQueryDao {
 
     City showCityThisSumLongestStreet(int countryId);
 
+    City showCityThisBiggerstPopulation(int countryId);
+
+    City showCityThisSmallestPopulation(int countryId);
+
 }

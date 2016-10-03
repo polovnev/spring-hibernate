@@ -7,7 +7,7 @@
 </head>
 <body>
 <my:menu/>
-<form method="post" action="/update/street">
+<form method="post" action="/street/update/">
     <input type="hidden" name="id" value="${street.id}">
     <table>
         <tr>
@@ -15,7 +15,7 @@
             <td><select name="city">
                 <c:forEach items="${cities}" var="city">
                     <option value="${city.id}" <c:if
-                            test="${city.id == street.city}">selected </c:if>>${city.name}</option>
+                            test="${city.id == street.cityId}">selected </c:if>>${city.name}</option>
                 </c:forEach>
             </select></td>
         </tr>
@@ -25,7 +25,7 @@
             <td><select name="streetName">
                 <c:forEach items="${streetNames}" var="streetName">
                     <option value="${streetName.id}" <c:if
-                            test="${streetName.id == street.streetName}">selected </c:if>>${streetName.name}</option>
+                            test="${streetName.id == street.streetNameId}">selected </c:if>>${streetName.name}</option>
                 </c:forEach>
             </select></td>
         </tr>
