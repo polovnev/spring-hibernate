@@ -7,6 +7,7 @@ import com.springapp.mvc.model.Street;
 import com.springapp.mvc.model.StreetNameInfo;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Expression;
 import org.springframework.stereotype.Repository;
@@ -45,6 +46,33 @@ public class CityDaoImpl extends AbstractDaoImpl implements CityDao {
             result.add(street.getCity());
         }
         return result;
+    }
+
+    @Override
+    public City showCityThisSumLongestStreet(int countryId) {
+        String hql = "SELECT S.city FROM Street S WHERE S.city.country.id = :countryId GROUP BY S.city ORDER BY sum(S.length) DESC";
+        Query query = getSession().createQuery(hql);
+        query.setParameter("countryId", countryId);
+        List<City> list = query.list();
+        return list.get(0);
+    }
+
+    @Override
+    public City showCityThisBiggerstPopulation(int countryId) {
+        String hql = "SELECT C FROM City C WHERE C.country.id = :countryId ORDER BY C.population DESC";
+        Query query = getSession().createQuery(hql);
+        query.setParameter("countryId", countryId);
+        List<City> list = query.list();
+        return list.get(0);
+    }
+
+    @Override
+    public City showCityThisSmallestPopulation(int countryId) {
+        String hql = "SELECT C FROM City C WHERE C.country.id = :countryId ORDER BY C.population";
+        Query query = getSession().createQuery(hql);
+        query.setParameter("countryId", countryId);
+        List<City> list = query.list();
+        return list.get(0);
     }
 
 

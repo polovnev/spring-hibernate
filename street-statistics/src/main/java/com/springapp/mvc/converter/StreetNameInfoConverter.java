@@ -13,17 +13,27 @@ public class StreetNameInfoConverter {
         String name = streetNameDTO.getName();
         int isPerson = (streetNameDTO.isPerson()) ? 1 : 0;
         String description = streetNameDTO.getDescription();
-        return new StreetNameInfo(id, name, isPerson, description);
+        StreetNameInfo result = new StreetNameInfo();
+        result.setId(id);
+        result.setName(name);
+        result.setPerson(isPerson);
+        result.setDescription(description);
+        return result;
     }
 
     public StreetNameInfoDto convertToStreetNameInfoDto(StreetNameInfo streetName, boolean isFullInfo) {
         int id = streetName.getId();
         String name = streetName.getName();
+        StreetNameInfoDto result = new StreetNameInfoDto();
+        result.setId(id);
+        result.setName(name);
         if (isFullInfo) {
             String description = streetName.getDescription();
             boolean isPerson = streetName.getPerson() == 1;
-            return new StreetNameInfoDto(id, name, isPerson, description);
+            result.setDescription(description);
+            result.setPerson(isPerson);
+            return result;
         }
-        return new StreetNameInfoDto(id, name);
+        return result;
     }
 }

@@ -15,13 +15,13 @@
             if (id == undefined) {
                 alert("country not checked");
             } else {
-                $.get("/sumLongestStreet?idCountry=" + id, function (data) {
+                $.get("/city/sumLongestStreet?idCountry=" + id, function (data) {
                     $("#sumLongestStreet").text(data);
                 });
-                $.get("/biggestPopulation?idCountry=" + id, function (data) {
+                $.get("/city/biggestPopulation?idCountry=" + id, function (data) {
                     $("#biggestPopulation").text(data);
                 });
-                $.get("/smallestPopulation?idCountry=" + id, function (data) {
+                $.get("/city/smallestPopulation?idCountry=" + id, function (data) {
                     $("#smallestPopulation").text(data);
                 });
             }

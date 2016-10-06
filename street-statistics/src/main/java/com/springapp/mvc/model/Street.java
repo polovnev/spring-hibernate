@@ -53,13 +53,6 @@ public class Street implements Serializable{
         this.length = length;
     }
 
-    public Street(int id, City city, StreetNameInfo streetName, int length) {
-        this.id = id;
-        this.city = city;
-        this.streetName = streetName;
-        this.length = length;
-    }
-
     public Street() {
     }
 }

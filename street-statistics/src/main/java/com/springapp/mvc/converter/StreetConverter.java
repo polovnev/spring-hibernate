@@ -26,9 +26,13 @@ public class StreetConverter {
         int length = streetDTO.getLength();
 
         City city = (City)cityDAO.getById(cityId);
-        StreetNameInfo streetName = (StreetNameInfo)streetNameDAO.getById(streetNameId);
-
-        return new Street(id,city,streetName,length);
+        StreetNameInfo streetNameInfo = (StreetNameInfo)streetNameDAO.getById(streetNameId);
+        Street result = new Street();
+        result.setId(id);
+        result.setCity(city);
+        result.setStreetName(streetNameInfo);
+        result.setLength(length);
+        return result;
     }
 
 
@@ -37,7 +41,11 @@ public class StreetConverter {
         int cityId = street.getCity().getId();
         int streetNameId = street.getStreetName().getId();
         int length = street.getLength();
-
-        return new StreetDto(id,cityId,streetNameId,length);
+        StreetDto result = new StreetDto();
+        result.setId(id);
+        result.setCityId(cityId);
+        result.setStreetNameId(streetNameId);
+        result.setLength(length);
+        return result;
     }
 }

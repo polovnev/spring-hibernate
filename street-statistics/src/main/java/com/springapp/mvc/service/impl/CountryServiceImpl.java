@@ -1,9 +1,7 @@
 package com.springapp.mvc.service.impl;
 
 import com.springapp.mvc.converter.CountryConverter;
-import com.springapp.mvc.dao.ComplexQueryDao;
 import com.springapp.mvc.dao.CountryDao;
-import com.springapp.mvc.dto.CityDto;
 import com.springapp.mvc.dto.CountryDto;
 import com.springapp.mvc.model.Country;
 import com.springapp.mvc.service.CountryService;

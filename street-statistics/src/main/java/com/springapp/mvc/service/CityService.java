@@ -16,4 +16,10 @@ public interface CityService {
     List<CityDto> getCitiesByCountry(int id);
 
     void removeCity(int id);
+
+    CityDto showCityThisSumLongestStreet(int countryId);
+
+    CityDto showCityThisBiggestPopulation(int countryId);
+
+    CityDto showCityThisSmallestPopulation(int countryId);
 }

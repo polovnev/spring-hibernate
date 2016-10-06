@@ -8,13 +8,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.ModelAndView;
+
 
 import java.util.List;
 
 @Controller
 @RequestMapping(value = "/country")
-public class CountryController extends Redirector {
+public class CountryController {
 
     @Autowired
     private CountryService countryService;
@@ -25,10 +26,12 @@ public class CountryController extends Redirector {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public RedirectView addCountry(@RequestParam("country_name") String country_name, @RequestParam("population") int population) {
-        CountryDto countryDTO = new CountryDto(country_name, population);
+    public ModelAndView addCountry(@RequestParam("country_name") String country_name, @RequestParam("population") int population) {
+        CountryDto countryDTO = new CountryDto();
+        countryDTO.setName(country_name);
+        countryDTO.setPopulation(population);
         countryService.saveCountry(countryDTO);
-        return redirectToMainPage();
+        return new ModelAndView("redirect:/country/show");
     }
 
     @RequestMapping(value = "/show", method = RequestMethod.GET)
@@ -39,10 +42,13 @@ public class CountryController extends Redirector {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public RedirectView updateCountry(@RequestParam("id") int id, @RequestParam("country_name") String country_name, @RequestParam("population") int population) {
-        CountryDto countryDTO = new CountryDto(id, country_name, population);
+    public ModelAndView updateCountry(@RequestParam("id") int id, @RequestParam("country_name") String country_name, @RequestParam("population") int population) {
+        CountryDto countryDTO = new CountryDto();
+        countryDTO.setId(id);
+        countryDTO.setName(country_name);
+        countryDTO.setPopulation(population);
         countryService.saveCountry(countryDTO);
-        return redirectToMainPage();
+        return new ModelAndView("redirect:/country/show");
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
@@ -53,8 +59,8 @@ public class CountryController extends Redirector {
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.GET)
-    public String removeCountry(@RequestParam("id") int id) {
+    public ModelAndView removeCountry(@RequestParam("id") int id) {
         countryService.removeCountry(id);
-        return "show/showCountry";
+        return new ModelAndView("redirect:/country/show");
     }
 }

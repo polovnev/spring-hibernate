@@ -7,37 +7,36 @@ public class StreetNameInfoDto {
     private boolean isPerson;
     private String description;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public boolean isPerson() {
         return isPerson;
     }
 
+    public void setPerson(boolean person) {
+        isPerson = person;
+    }
+
     public String getDescription() {
         return description;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public StreetNameInfoDto(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public StreetNameInfoDto(int id, String name, boolean person, String description) {
-        this.id = id;
-        this.name = name;
-        isPerson = person;
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public StreetNameInfoDto(String name, boolean person, String description) {
-        this.name = name;
-        isPerson = person;
-        this.description = description;
-    }
 }

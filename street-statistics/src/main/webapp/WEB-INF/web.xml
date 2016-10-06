@@ -14,5 +14,11 @@
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
+        <url-pattern>/country/show</url-pattern>
 	</servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>country/show</welcome-file>
+    </welcome-file-list>
+
 </web-app>

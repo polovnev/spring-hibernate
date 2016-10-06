@@ -15,11 +15,6 @@ public class Country implements Serializable{
     private int population;
     private Set<City> cities;
 
-    public Country(int id, String name, int population) {
-        this.id = id;
-        this.name = name;
-        this.population = population;
-    }
 
     @Id
     @GeneratedValue(strategy=IDENTITY)

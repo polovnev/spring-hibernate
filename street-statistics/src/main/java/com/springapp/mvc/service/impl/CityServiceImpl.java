@@ -61,4 +61,23 @@ public class CityServiceImpl implements CityService {
         cityDao.deleteById(id);
     }
 
+
+    @Override
+    public CityDto showCityThisSumLongestStreet(int countryId) {
+        City city = cityDao.showCityThisSumLongestStreet(countryId);
+        return cityConverter.convertToCityDto(city, false);
+    }
+
+    @Override
+    public CityDto showCityThisBiggestPopulation(int countryId) {
+        City city = cityDao.showCityThisBiggerstPopulation(countryId);
+        return cityConverter.convertToCityDto(city,false);
+    }
+
+    @Override
+    public CityDto showCityThisSmallestPopulation(int countryId) {
+        City city = cityDao.showCityThisSmallestPopulation(countryId);
+        return cityConverter.convertToCityDto(city,false);
+    }
+
 }

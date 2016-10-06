@@ -64,14 +64,6 @@ public class StreetNameInfo implements Serializable{
         this.streets = streets;
     }
 
-
-    public StreetNameInfo(int id, String name, int person, String description) {
-        this.id = id;
-        this.name = name;
-        isPerson = person;
-        this.description = description;
-    }
-
     public StreetNameInfo() {
     }
 }

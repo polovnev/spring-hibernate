@@ -10,13 +10,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
 
 import java.util.List;
 
 @Controller
 @RequestMapping("/city")
-public class CityController extends Redirector {
+public class CityController {
 
     @Autowired
     private CityService cityService;
@@ -25,16 +27,19 @@ public class CityController extends Redirector {
     private CountryService countryService;
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public RedirectView addCity(@RequestParam("country") int countryId, @RequestParam("city_name") String city_name, @RequestParam("population") int population) {
-        CityDto cityDto = new CityDto(city_name, countryId, population);
+    public ModelAndView addCity(@RequestParam("country") int countryId, @RequestParam("city_name") String city_name, @RequestParam("population") int population) {
+        CityDto cityDto = new CityDto();
+        cityDto.setName(city_name);
+        cityDto.setCountry(countryId);
+        cityDto.setPopulation(population);
         cityService.saveCity(cityDto);
-        return redirectToMainPage();
+        return new ModelAndView("redirect:/country/show");
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addCity(ModelMap modelMap) {
         List<CountryDto> countryList = countryService.getAllCountriesDtos();
-        modelMap.put("countries",countryList);
+        modelMap.put("countries", countryList);
         return "add/addCity";
     }
 
@@ -52,10 +57,14 @@ public class CityController extends Redirector {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public RedirectView updateCity(@RequestParam("id") int id, @RequestParam("country") int countryId, @RequestParam("city_name") String city_name, @RequestParam("population") int population) {
-        CityDto cityDTO = new CityDto(id, city_name, countryId, population);
-        cityService.saveCity(cityDTO);
-        return redirectToMainPage();
+    public ModelAndView updateCity(@RequestParam("id") int id, @RequestParam("country") int countryId, @RequestParam("city_name") String city_name, @RequestParam("population") int population) {
+        CityDto cityDto = new CityDto();
+        cityDto.setId(id);
+        cityDto.setName(city_name);
+        cityDto.setCountry(countryId);
+        cityDto.setPopulation(population);
+        cityService.saveCity(cityDto);
+        return new ModelAndView("redirect:/country/show");
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
@@ -65,6 +74,27 @@ public class CityController extends Redirector {
         modelMap.put("city", city);
         modelMap.put("countries", countryList);
         return "change/changeCity";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/sumLongestStreet", method = RequestMethod.GET)
+    public String showCityThisSumLongestStreet(@RequestParam("idCountry") int id) {
+        CityDto result = cityService.showCityThisSumLongestStreet(id);
+        return result.getName();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/biggestPopulation", method = RequestMethod.GET)
+    public String showCityThisBiggerstPopulation(@RequestParam("idCountry") int id) {
+        CityDto result = cityService.showCityThisBiggestPopulation(id);
+        return result.getName();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/smallestPopulation", method = RequestMethod.GET)
+    public String showCityThisSmallestPopulation(@RequestParam("idCountry") int id) {
+        CityDto result = cityService.showCityThisSmallestPopulation(id);
+        return result.getName();
     }
 
 }

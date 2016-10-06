@@ -12,6 +12,12 @@ public interface CityDao extends AbstractDao {
 
     List<City> getAllCityByStreetName(int idStreetName);
 
+    City showCityThisSumLongestStreet(int countryId);
+
+    City showCityThisBiggerstPopulation(int countryId);
+
+    City showCityThisSmallestPopulation(int countryId);
+
 
 
 }

@@ -66,10 +66,5 @@ public class City implements Serializable{
         this.streets = streets;
     }
 
-    public City(int id, String name, Country country, int population) {
-        this.id = id;
-        this.name = name;
-        this.country = country;
-        this.population = population;
-    }
+
 }

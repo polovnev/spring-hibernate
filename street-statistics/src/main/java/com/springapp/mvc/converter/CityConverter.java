@@ -19,18 +19,27 @@ public class CityConverter {
         int countryId = cityDTO.getCountry();
         int population = cityDTO.getPopulation();
         Country country = (Country) countryDAO.getById(countryId);
-        City city = new City(id, name, country, population);
-        return city;
+        City result = new City();
+        result.setId(id);
+        result.setName(name);
+        result.setCountry(country);
+        result.setPopulation(population);
+        return result;
     }
 
     public CityDto convertToCityDto(City city, boolean isFullInfo) {
         int id = city.getId();
         String name = city.getName();
+        CityDto result = new CityDto();
+        result.setId(id);
+        result.setName(name);
         if(isFullInfo) {
             int countryId = city.getCountry().getId();
             int population = city.getPopulation();
-            return new CityDto(id,name,countryId, population);
+            result.setPopulation(population);
+            result.setCountry(countryId);
+            return result;
         }
-        return new CityDto(id,name);
+        return result;
     }
 }

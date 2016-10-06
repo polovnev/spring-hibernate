@@ -11,13 +11,20 @@ public class CountryConverter {
         int id = countryDTO.getId();
         String name = countryDTO.getName();
         int population = countryDTO.getPopulation();
-        return new Country(id, name, population);
+        Country result = new Country();
+        result.setId(id);
+        result.setName(name);
+        result.setPopulation(population);
+        return result;
     }
 
     public CountryDto convertToCountryDto(Country country) {
         int id = country.getId();
         String name = country.getName();
-        return new CountryDto(id,name);
+        CountryDto result = new CountryDto();
+        result.setId(id);
+        result.setName(name);
+        return result;
     }
 
 
