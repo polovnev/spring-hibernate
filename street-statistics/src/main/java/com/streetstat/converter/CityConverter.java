@@ -1,12 +1,12 @@
 package com.streetstat.converter;
 
-import com.streetstat.dao.CountryDao;
 import com.streetstat.dto.CityDto;
+import com.streetstat.dto.CountryDto;
 import com.streetstat.dto.StreetDto;
 import com.streetstat.model.City;
 import com.streetstat.model.Country;
 import com.streetstat.model.Street;
-import org.hibernate.LazyInitializationException;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ import java.util.Set;
 public class CityConverter {
 
     @Autowired
-    private CountryDao countryDAO;
+    private CountryConverter countryConverter;
 
     @Autowired
     private StreetConverter streetConverter;
@@ -25,9 +25,8 @@ public class CityConverter {
     public City convertToCity(CityDto cityDTO) {
         int id = cityDTO.getId();
         String name = cityDTO.getName();
-        int countryId = cityDTO.getCountry();
         int population = cityDTO.getPopulation();
-        Country country = (Country) countryDAO.getById(countryId);
+        Country country = countryConverter.convertToCountry(cityDTO.getCountryDto());
         Set<StreetDto> streetDtos = cityDTO.getStreetDtos();
 
         City result = new City();
@@ -36,7 +35,7 @@ public class CityConverter {
         result.setCountry(country);
         result.setPopulation(population);
 
-        Set<Street> streets = streetConverter.convertToSetStreet(streetDtos);
+        Set<Street> streets = getSetStreet(streetDtos);
         result.setStreets(streets);
         return result;
     }
@@ -45,7 +44,7 @@ public class CityConverter {
     public CityDto convertToCityDto(City city) {
         int id = city.getId();
         String name = city.getName();
-        int countryId = city.getCountry().getId();
+        Country country = city.getCountry();
         int population = city.getPopulation();
         Set<Street> streets = city.getStreets();
 
@@ -53,35 +52,37 @@ public class CityConverter {
         result.setId(id);
         result.setName(name);
         result.setPopulation(population);
-        result.setCountry(countryId);
 
-        if (streets != null) {
-            Set<StreetDto> streetDtos = streetConverter.convertToSetStreetDtos(streets);
-            result.setStreetDtos(streetDtos);
-        }
+        CountryDto countryDto = countryConverter.convertToCountryDto(country);
+        result.setCountryDto(countryDto);
+
+        Set<StreetDto> streetDtos = getSetStreetDtos(streets);
+        result.setStreetDtos(streetDtos);
+
         return result;
     }
 
-    Set<CityDto> convertSetToCityDto(Set<City> cities) {
-        Set<CityDto> result = new HashSet<CityDto>();
-        try {
-            for (City city : cities) {
-                CityDto cityDto = convertToCityDto(city);
-                result.add(cityDto);
+
+    private Set<StreetDto> getSetStreetDtos(Set<Street> streets) {
+        Set<StreetDto> result = new HashSet<StreetDto>();
+        if (Hibernate.isInitialized(streets)) {
+            for (Street street : streets) {
+                StreetDto streetDto = streetConverter.convertToStreetDto(street);
+                result.add(streetDto);
             }
-        } catch (LazyInitializationException e) {
         }
         return result;
     }
 
-    Set<City> convertSetToCity(Set<CityDto> cities) {
-        if(cities == null)
-            return null;
-        Set<City> result = new HashSet<City>();
-        for (CityDto cityDto : cities) {
-            City city = convertToCity(cityDto) ;
-            result.add(city);
+    private Set<Street> getSetStreet(Set<StreetDto> streets) {
+        Set<Street> result = new HashSet<Street>();
+        if (streets != null) {
+            for (StreetDto streetDto : streets) {
+                Street street = streetConverter.convertToStreet(streetDto);
+                result.add(street);
+            }
         }
         return result;
     }
+
 }

@@ -66,10 +66,15 @@ public class StreetServiceImpl implements StreetService {
     }
 
     @Override
-    public StreetNameInfoDto getStreetNameInfoById(int id) {
+    public StreetNameInfoDto getStreetNameInfoDtoById(int id) {
         StreetNameInfo streetNameInfo = (StreetNameInfo) streetNameInfoDao.getById(id);
         StreetNameInfoDto streetNameInfoDto = streetNameInfoConverter.convertToStreetNameInfoDto(streetNameInfo,true);
         return streetNameInfoDto;
+    }
+
+    @Override
+    public StreetNameInfo getStreetNameInfoById(int id) {
+        return (StreetNameInfo) streetNameInfoDao.getById(id);
     }
 
     @Override

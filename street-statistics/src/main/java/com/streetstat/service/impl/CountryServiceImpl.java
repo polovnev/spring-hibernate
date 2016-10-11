@@ -43,6 +43,11 @@ public class CountryServiceImpl implements CountryService {
         return countryDto;
     }
 
+    public Country getCountryById(int id) {
+        Country country = (Country) countryDao.getById(id);
+        return country;
+    }
+
     public void removeCountry(int id) {
         countryDao.deleteById(id);
     }

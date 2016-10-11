@@ -3,8 +3,6 @@ package com.streetstat.dto;
 public class StreetDto {
 
     private int id;
-    private int cityId;
-    private int streetNameId;
     private int length;
     private CityDto cityDto;
     private StreetNameInfoDto streetNameInfoDto;
@@ -15,22 +13,6 @@ public class StreetDto {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(int cityId) {
-        this.cityId = cityId;
-    }
-
-    public int getStreetNameId() {
-        return streetNameId;
-    }
-
-    public void setStreetNameId(int streetNameId) {
-        this.streetNameId = streetNameId;
     }
 
     public int getLength() {
@@ -56,6 +38,5 @@ public class StreetDto {
     public void setStreetNameInfoDto(StreetNameInfoDto streetNameInfoDto) {
         this.streetNameInfoDto = streetNameInfoDto;
     }
-
 
 }

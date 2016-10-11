@@ -114,7 +114,7 @@ public class StreetController {
 
     @RequestMapping(value = "/streetNameInfo/update", method = RequestMethod.GET)
     public String updateStreetName(@RequestParam("id") int id, ModelMap modelMap) {
-        StreetNameInfoDto streetName = streetService.getStreetNameInfoById(id);
+        StreetNameInfoDto streetName = streetService.getStreetNameInfoDtoById(id);
         modelMap.put("streetName", streetName);
         return "change/changeStreetName";
     }

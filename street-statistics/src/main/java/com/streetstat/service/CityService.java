@@ -2,6 +2,7 @@ package com.streetstat.service;
 
 
 import com.streetstat.dto.CityDto;
+import com.streetstat.model.City;
 
 import java.util.List;
 
@@ -10,6 +11,8 @@ public interface CityService {
     void saveCity(CityDto cityDto);
 
     CityDto getCityDtoById(int id);
+
+    City getCityById(int id);
 
     List<CityDto> getAllCityDtos();
 

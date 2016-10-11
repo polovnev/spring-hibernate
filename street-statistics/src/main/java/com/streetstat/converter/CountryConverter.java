@@ -4,10 +4,11 @@ import com.streetstat.dto.CityDto;
 import com.streetstat.dto.CountryDto;
 import com.streetstat.model.City;
 import com.streetstat.model.Country;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Set;
+import java.util.*;
 
 @Component
 public class CountryConverter {
@@ -19,14 +20,14 @@ public class CountryConverter {
         int id = countryDTO.getId();
         String name = countryDTO.getName();
         int population = countryDTO.getPopulation();
-        Set<CityDto> cities = countryDTO.getCityDtos();
+        Set<CityDto> cityDtos = countryDTO.getCityDtos();
 
         Country result = new Country();
         result.setId(id);
         result.setName(name);
         result.setPopulation(population);
 
-        Set<City> citySet = cityConverter.convertSetToCity(cities);
+        Set<City> citySet = getCities(cityDtos);
         result.setCities(citySet);
         return result;
     }
@@ -43,9 +44,29 @@ public class CountryConverter {
         result.setName(name);
         result.setPopulation(population);
 
-        Set<CityDto> cityDtos = cityConverter.convertSetToCityDto(cities);
+        Set<CityDto> cityDtos = getCityDtos(cities);
         result.setCityDtos(cityDtos);
         return result;
+    }
+
+    private Set<CityDto> getCityDtos(Set<City> cities) {
+        Set<CityDto> cityDtos = new HashSet<CityDto>();
+        if (Hibernate.isInitialized(cities)) {
+            for (City city : cities) {
+                cityDtos.add(cityConverter.convertToCityDto(city));
+            }
+        }
+        return cityDtos;
+    }
+
+    private Set<City> getCities(Set<CityDto> cityDtos) {
+        Set<City> cities = new HashSet<City>();
+        if (cityDtos != null) {
+            for (CityDto cityDto : cityDtos) {
+                cities.add(cityConverter.convertToCity(cityDto));
+            }
+        }
+        return cities;
     }
 
 

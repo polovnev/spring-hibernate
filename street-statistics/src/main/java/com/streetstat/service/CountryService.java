@@ -2,6 +2,7 @@ package com.streetstat.service;
 
 
 import com.streetstat.dto.CountryDto;
+import com.streetstat.model.Country;
 
 import java.util.List;
 
@@ -14,6 +15,8 @@ public interface CountryService {
     List<CountryDto> getAllCountriesDtos();
 
     void removeCountry(int id);
+
+    Country getCountryById(int id);
 
 
 }

@@ -36,6 +36,11 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
+    public City getCityById(int id) {
+        return (City) cityDao.getById(id);
+    }
+
+    @Override
     public List<CityDto> getAllCityDtos() {
         List<City> cityList = cityDao.getAll();
         List<CityDto> result = new ArrayList<CityDto>(cityList.size());

@@ -21,19 +21,16 @@ public class StreetNameInfoConverter {
         return result;
     }
 
-    public StreetNameInfoDto convertToStreetNameInfoDto(StreetNameInfo streetName, boolean isFullInfo) {
+    public StreetNameInfoDto convertToStreetNameInfoDto(StreetNameInfo streetName) {
         int id = streetName.getId();
         String name = streetName.getName();
         StreetNameInfoDto result = new StreetNameInfoDto();
+        String description = streetName.getDescription();
+        boolean isPerson = streetName.getPerson() == 1;
         result.setId(id);
         result.setName(name);
-        if (isFullInfo) {
-            String description = streetName.getDescription();
-            boolean isPerson = streetName.getPerson() == 1;
-            result.setDescription(description);
-            result.setPerson(isPerson);
-            return result;
-        }
+        result.setDescription(description);
+        result.setPerson(isPerson);
         return result;
     }
 }

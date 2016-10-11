@@ -36,7 +36,7 @@ public class Street implements Serializable{
 
     @ManyToOne
     @JoinColumn(name="street_name_info_ref")
-    public StreetNameInfo getStreetName() {
+    public StreetNameInfo getStreetNameInfo() {
         return streetName;
     }
 

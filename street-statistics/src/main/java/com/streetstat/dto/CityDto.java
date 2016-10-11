@@ -7,7 +7,6 @@ public class CityDto {
 
     private int id;
     private String name;
-    private int country;
     private int population;
     private CountryDto countryDto;
     private Set<StreetDto> streetDtos;
@@ -18,9 +17,6 @@ public class CityDto {
         return name;
     }
 
-    public int getCountry() {
-        return country;
-    }
 
     public int getPopulation() {
         return population;
@@ -36,10 +32,6 @@ public class CityDto {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setCountry(int country) {
-        this.country = country;
     }
 
     public void setPopulation(int population) {
