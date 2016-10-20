@@ -51,7 +51,7 @@ public class CountryConverter {
 
     private Set<CityDto> getCityDtos(Set<City> cities) {
         Set<CityDto> cityDtos = new HashSet<CityDto>();
-        if (Hibernate.isInitialized(cities)) {
+        if (cities != null && Hibernate.isInitialized(cities) ) {
             for (City city : cities) {
                 cityDtos.add(cityConverter.convertToCityDto(city));
             }

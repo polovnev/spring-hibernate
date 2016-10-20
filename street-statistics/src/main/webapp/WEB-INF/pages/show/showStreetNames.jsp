@@ -7,10 +7,10 @@
 </head>
 <body>
 <my:menu/>
-<c:forEach items="${streetNames}" var="streetName">
-    <h1>${streetName.name}</h1>
+<c:forEach items="${streetNames}" var="streetNameInfo">
+    <h1>${streetNameInfo.name}</h1>
     <hr/>
-    <a href="/streetNameInfo/remove?id=${streetName.id}">remove</a> <a href="/streetNameInfo/update?id=${streetName.id}">change</a>
+    <a href="/streetNameInfo/remove?id=${streetNameInfo.id}">remove</a> <a href="/streetNameInfo/update?id=${streetNameInfo.id}">change</a>
     <hr/>
 </c:forEach>
 </body>

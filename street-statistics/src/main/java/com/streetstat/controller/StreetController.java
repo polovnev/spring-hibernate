@@ -28,10 +28,16 @@ public class StreetController {
 
 
     @RequestMapping(value = "/street/add", method = RequestMethod.POST)
-    public ModelAndView addStreet(@RequestParam("city") int city,@RequestParam("streetName") int streetName,@RequestParam("length") int length) {
+    public ModelAndView addStreet(@RequestParam("city") int city, @RequestParam("streetNameInfo") int streetName, @RequestParam("length") int length) {
         StreetDto streetDto = new StreetDto();
-        streetDto.setCityId(city);
-        streetDto.setStreetNameId(streetName);
+        CityDto cityDto = new CityDto();
+        cityDto.setId(city);
+        streetDto.setCityDto(cityDto);
+
+        StreetNameInfoDto streetNameInfoDto = new StreetNameInfoDto();
+        streetNameInfoDto.setId(streetName);
+        streetDto.setStreetNameInfoDto(streetNameInfoDto);
+
         streetDto.setLength(length);
         streetService.saveStreet(streetDto);
         return new ModelAndView("redirect:/country/show");
@@ -41,8 +47,8 @@ public class StreetController {
     public String addStreet(ModelMap modelMap) {
         List<CityDto> cities = cityService.getAllCityDtos();
         List<StreetNameInfoDto> streetNames = streetService.getAllStreetNamesInfoDtos();
-        modelMap.put("cities",cities);
-        modelMap.put("streetNames",streetNames);
+        modelMap.put("cities", cities);
+        modelMap.put("streetNames", streetNames);
         return "add/addStreet";
     }
 
@@ -66,14 +72,20 @@ public class StreetController {
 
 
     @RequestMapping(value = "/street/update", method = RequestMethod.POST)
-    public ModelAndView updateStreet(@RequestParam("id") int id, @RequestParam("city") int city, @RequestParam("streetName") int streetName, @RequestParam("length") int length) {
+    public ModelAndView updateStreet(@RequestParam("id") int id, @RequestParam("city") int city, @RequestParam("streetNameInfo") int streetNameInfo, @RequestParam("length") int length) {
         StreetDto streetDTO = new StreetDto();
         streetDTO.setId(id);
-        streetDTO.setCityId(city);
-        streetDTO.setStreetNameId(streetName);
+        CityDto cityDto = new CityDto();
+        cityDto.setId(city);
+        streetDTO.setCityDto(cityDto);
+
+        StreetNameInfoDto streetNameInfoDto = new StreetNameInfoDto();
+        streetNameInfoDto.setId(streetNameInfo);
+        streetDTO.setStreetNameInfoDto(streetNameInfoDto);
         streetDTO.setLength(length);
         streetService.saveStreet(streetDTO);
         return new ModelAndView("redirect:/country/show");
+
     }
 
     @RequestMapping(value = "/street/remove", method = RequestMethod.GET)
@@ -115,7 +127,7 @@ public class StreetController {
     @RequestMapping(value = "/streetNameInfo/update", method = RequestMethod.GET)
     public String updateStreetName(@RequestParam("id") int id, ModelMap modelMap) {
         StreetNameInfoDto streetName = streetService.getStreetNameInfoDtoById(id);
-        modelMap.put("streetName", streetName);
+        modelMap.put("streetNameInfo", streetName);
         return "change/changeStreetName";
     }
 

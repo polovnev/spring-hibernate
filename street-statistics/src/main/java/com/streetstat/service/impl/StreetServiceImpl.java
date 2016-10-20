@@ -68,7 +68,7 @@ public class StreetServiceImpl implements StreetService {
     @Override
     public StreetNameInfoDto getStreetNameInfoDtoById(int id) {
         StreetNameInfo streetNameInfo = (StreetNameInfo) streetNameInfoDao.getById(id);
-        StreetNameInfoDto streetNameInfoDto = streetNameInfoConverter.convertToStreetNameInfoDto(streetNameInfo,true);
+        StreetNameInfoDto streetNameInfoDto = streetNameInfoConverter.convertToStreetNameInfoDto(streetNameInfo);
         return streetNameInfoDto;
     }
 
@@ -82,7 +82,7 @@ public class StreetServiceImpl implements StreetService {
         List<StreetNameInfo> streetNamesInfo = streetNameInfoDao.getAll();
         List<StreetNameInfoDto> result = new ArrayList<StreetNameInfoDto>(streetNamesInfo.size());
         for (StreetNameInfo streetNameInfo : streetNamesInfo) {
-            StreetNameInfoDto streetNameInfoDto = streetNameInfoConverter.convertToStreetNameInfoDto(streetNameInfo,false);
+            StreetNameInfoDto streetNameInfoDto = streetNameInfoConverter.convertToStreetNameInfoDto(streetNameInfo);
             result.add(streetNameInfoDto);
         }
         return result;

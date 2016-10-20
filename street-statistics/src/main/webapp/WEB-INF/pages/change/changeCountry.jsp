@@ -9,7 +9,6 @@
 <form method="post" action="/country/update">
     <input type="hidden" name="id" value="${country.id}">
     <table>
-
         <tr>
             <td>Country name:</td>
             <td><input type="text" name="country_name" value="${country.name}"/></td>

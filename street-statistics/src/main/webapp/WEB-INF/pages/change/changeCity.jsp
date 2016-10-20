@@ -20,7 +20,7 @@
             <td><select name="country">
                 <c:forEach items="${countries}" var="country">
                     <option value="${country.id}" <c:if
-                        test="${country.id == city.country}">selected </c:if>>${country.name}</option>
+                        test="${country.id == city.countryDto.id}">selected </c:if>>${country.name}</option>
                 </c:forEach>
             </select></td>
         </tr>

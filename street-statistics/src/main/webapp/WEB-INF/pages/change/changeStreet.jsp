@@ -15,17 +15,17 @@
             <td><select name="city">
                 <c:forEach items="${cities}" var="city">
                     <option value="${city.id}" <c:if
-                            test="${city.id == street.cityId}">selected </c:if>>${city.name}</option>
+                            test="${city.id == street.cityDto.id}">selected </c:if>>${city.name}</option>
                 </c:forEach>
             </select></td>
         </tr>
 
         <tr>
             <td>Street name:</td>
-            <td><select name="streetName">
-                <c:forEach items="${streetNames}" var="streetName">
-                    <option value="${streetName.id}" <c:if
-                            test="${streetName.id == street.streetNameId}">selected </c:if>>${streetName.name}</option>
+            <td><select name="streetNameInfo">
+                <c:forEach items="${streetNames}" var="streetNameInfo">
+                    <option value="${streetNameInfo.id}" <c:if
+                            test="${streetNameInfo.id == street.streetNameInfoDto.id}">selected </c:if>>${streetNameInfo.name}</option>
                 </c:forEach>
             </select></td>
         </tr>

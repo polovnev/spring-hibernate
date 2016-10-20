@@ -30,7 +30,9 @@ public class CityController {
     public ModelAndView addCity(@RequestParam("country") int countryId, @RequestParam("city_name") String city_name, @RequestParam("population") int population) {
         CityDto cityDto = new CityDto();
         cityDto.setName(city_name);
-        cityDto.setCountry(countryId);
+        CountryDto countryDto = new CountryDto();
+        countryDto.setId(countryId);
+        cityDto.setCountryDto(countryDto);
         cityDto.setPopulation(population);
         cityService.saveCity(cityDto);
         return new ModelAndView("redirect:/country/show");
@@ -61,7 +63,9 @@ public class CityController {
         CityDto cityDto = new CityDto();
         cityDto.setId(id);
         cityDto.setName(city_name);
-        cityDto.setCountry(countryId);
+        CountryDto countryDto = new CountryDto();
+        countryDto.setId(countryId);
+        cityDto.setCountryDto(countryDto);
         cityDto.setPopulation(population);
         cityService.saveCity(cityDto);
         return new ModelAndView("redirect:/country/show");

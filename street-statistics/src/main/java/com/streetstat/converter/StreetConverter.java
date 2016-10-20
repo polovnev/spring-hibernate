@@ -30,7 +30,7 @@ public class StreetConverter {
         Street result = new Street();
         result.setId(id);
         result.setCity(city);
-        result.setStreetName(streetNameInfo);
+        result.setStreetNameInfo(streetNameInfo);
         result.setLength(length);
         return result;
     }
@@ -43,7 +43,7 @@ public class StreetConverter {
         int length = street.getLength();
         StreetDto result = new StreetDto();
         result.setId(id);
-
+        city.setStreets(null);
         CityDto cityDto = cityConverter.convertToCityDto(city);
         result.setCityDto(cityDto);
 

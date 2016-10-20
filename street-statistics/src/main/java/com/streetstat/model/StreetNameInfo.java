@@ -55,7 +55,7 @@ public class StreetNameInfo implements Serializable{
         this.description = description;
     }
 
-    @OneToMany(mappedBy="streetName", cascade=CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy="streetNameInfo", cascade=CascadeType.ALL, orphanRemoval=true, fetch = FetchType.LAZY)
     public Set<Street> getStreets() {
         return streets;
     }

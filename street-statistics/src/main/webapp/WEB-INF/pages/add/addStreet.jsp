@@ -20,9 +20,9 @@
 
         <tr>
             <td>Street name:</td>
-            <td><select name="streetName">
-                <c:forEach items="${streetNames}" var="streetName">
-                    <option value="${streetName.id}">${streetName.name}</option>
+            <td><select name="streetNameInfo">
+                <c:forEach items="${streetNames}" var="streetNameInfo">
+                    <option value="${streetNameInfo.id}">${streetNameInfo.name}</option>
                 </c:forEach>
             </select></td>
         </tr>

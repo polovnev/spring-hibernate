@@ -10,7 +10,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Street implements Serializable{
     private int id;
     private City city;
-    private StreetNameInfo streetName;
+    private StreetNameInfo streetNameInfo;
     private int length;
 
     @Id
@@ -37,11 +37,11 @@ public class Street implements Serializable{
     @ManyToOne
     @JoinColumn(name="street_name_info_ref")
     public StreetNameInfo getStreetNameInfo() {
-        return streetName;
+        return streetNameInfo;
     }
 
-    public void setStreetName(StreetNameInfo streetName) {
-        this.streetName = streetName;
+    public void setStreetNameInfo(StreetNameInfo streetNameInfo) {
+        this.streetNameInfo = streetNameInfo;
     }
 
     @Column(name="length")

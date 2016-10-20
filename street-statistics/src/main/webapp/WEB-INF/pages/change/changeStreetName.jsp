@@ -9,20 +9,20 @@
 <body>
 <my:menu/>
 <form method="post" action="/streetNameInfo/update">
-    <input type="hidden" name="id" value="${streetName.id}"/>
+    <input type="hidden" name="id" value="${streetNameInfo.id}"/>
     <table>
         <tr>
             <td>Street name:</td>
-            <td><input type="text" name="street_name" value="${streetName.name}"/></td>
+            <td><input type="text" name="street_name" value="${streetNameInfo.name}"/></td>
         </tr>
         <tr>
             <td>is Person:</td>
             <td><input type="checkbox" name="person" value="person" <c:if
-                    test="${streetName.person}">checked/></c:if></td>
+                    test="${streetNameInfo.person}">checked/></c:if></td>
         </tr>
         <tr>
             <td>Description:</td>
-            <td><textarea rows="10" cols="45" name="description">${streetName.description}</textarea></td>
+            <td><textarea rows="10" cols="45" name="description">${streetNameInfo.description}</textarea></td>
         </tr>
         <tr>
             <td><input type="submit"></td>

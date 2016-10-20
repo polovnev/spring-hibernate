@@ -26,7 +26,12 @@ public class CityConverter {
         int id = cityDTO.getId();
         String name = cityDTO.getName();
         int population = cityDTO.getPopulation();
-        Country country = countryConverter.convertToCountry(cityDTO.getCountryDto());
+
+        CountryDto countryDto = cityDTO.getCountryDto();
+        Country country = null;
+        if (countryDto != null) {
+             countryConverter.convertToCountry(countryDto);
+        }
         Set<StreetDto> streetDtos = cityDTO.getStreetDtos();
 
         City result = new City();
@@ -45,6 +50,7 @@ public class CityConverter {
         int id = city.getId();
         String name = city.getName();
         Country country = city.getCountry();
+        country.setCities(null);
         int population = city.getPopulation();
         Set<Street> streets = city.getStreets();
 
@@ -65,7 +71,7 @@ public class CityConverter {
 
     private Set<StreetDto> getSetStreetDtos(Set<Street> streets) {
         Set<StreetDto> result = new HashSet<StreetDto>();
-        if (Hibernate.isInitialized(streets)) {
+        if (streets != null && Hibernate.isInitialized(streets)) {
             for (Street street : streets) {
                 StreetDto streetDto = streetConverter.convertToStreetDto(street);
                 result.add(streetDto);
