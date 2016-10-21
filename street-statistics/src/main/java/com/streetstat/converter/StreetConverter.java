@@ -20,7 +20,7 @@ public class StreetConverter {
     private StreetNameInfoConverter streetNameInfoConverter;
 
     public Street convertToStreet(StreetDto streetDTO) {
-        int id = streetDTO.getId();
+        long id = streetDTO.getId();
         CityDto cityDto = streetDTO.getCityDto();
         StreetNameInfoDto streetNameInfoDto = streetDTO.getStreetNameInfoDto();
         int length = streetDTO.getLength();
@@ -37,7 +37,7 @@ public class StreetConverter {
 
 
     public StreetDto convertToStreetDto(Street street) {
-        int id = street.getId();
+        long id = street.getId();
         City city = street.getCity();
         StreetNameInfo streetNameInfo = street.getStreetNameInfo();
         int length = street.getLength();

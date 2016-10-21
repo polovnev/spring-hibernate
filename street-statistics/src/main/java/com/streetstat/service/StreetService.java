@@ -11,20 +11,20 @@ public interface StreetService {
 
     void saveStreet(StreetDto streetDto);
 
-    StreetDto getStreetDtoById(int id);
+    StreetDto getStreetDtoById(long id);
 
-    List<StreetDto> getStreetsByCity(int id);
+    List<StreetDto> getStreetsByCity(long id);
 
-    void removeStreet(int id);
+    void removeStreet(long id);
 
     void saveStreetNameInfo(StreetNameInfoDto streetNameInfoDto);
 
-    StreetNameInfoDto getStreetNameInfoDtoById(int id);
+    StreetNameInfoDto getStreetNameInfoDtoById(long id);
 
-    StreetNameInfo getStreetNameInfoById(int id);
+    StreetNameInfo getStreetNameInfoById(long id);
 
     List<StreetNameInfoDto> getAllStreetNamesInfoDtos();
 
-    void removeStreetNameInfo(int id);
+    void removeStreetNameInfo(long id);
 
 }

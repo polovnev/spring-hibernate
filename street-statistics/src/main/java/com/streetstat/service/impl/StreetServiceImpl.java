@@ -38,14 +38,14 @@ public class StreetServiceImpl implements StreetService {
     }
 
     @Override
-    public StreetDto getStreetDtoById(int id) {
-        Street street = (Street) streetDao.getById(id);
+    public StreetDto getStreetDtoById(long id) {
+        Street street = (Street) streetDao.findById(id,"");
         StreetDto streetDto = streetConverter.convertToStreetDto(street);
         return streetDto;
     }
 
     @Override
-    public List<StreetDto> getStreetsByCity(int id) {
+    public List<StreetDto> getStreetsByCity(long id) {
         Set<Street> streets = streetDao.getStreetsForCityId(id);
         List<StreetDto> result = new ArrayList<StreetDto>(streets.size());
         for (Street street : streets) {
@@ -55,7 +55,7 @@ public class StreetServiceImpl implements StreetService {
         return result;
     }
 
-    public void removeStreet(int id) {
+    public void removeStreet(long id) {
         streetDao.deleteById(id);
     }
 
@@ -66,20 +66,20 @@ public class StreetServiceImpl implements StreetService {
     }
 
     @Override
-    public StreetNameInfoDto getStreetNameInfoDtoById(int id) {
-        StreetNameInfo streetNameInfo = (StreetNameInfo) streetNameInfoDao.getById(id);
+    public StreetNameInfoDto getStreetNameInfoDtoById(long id) {
+        StreetNameInfo streetNameInfo = (StreetNameInfo) streetNameInfoDao.findById(id,"");
         StreetNameInfoDto streetNameInfoDto = streetNameInfoConverter.convertToStreetNameInfoDto(streetNameInfo);
         return streetNameInfoDto;
     }
 
     @Override
-    public StreetNameInfo getStreetNameInfoById(int id) {
-        return (StreetNameInfo) streetNameInfoDao.getById(id);
+    public StreetNameInfo getStreetNameInfoById(long id) {
+        return (StreetNameInfo) streetNameInfoDao.findById(id,"");
     }
 
     @Override
     public List<StreetNameInfoDto> getAllStreetNamesInfoDtos() {
-        List<StreetNameInfo> streetNamesInfo = streetNameInfoDao.getAll();
+        List<StreetNameInfo> streetNamesInfo = streetNameInfoDao.getStreetNameInfos(0,100);
         List<StreetNameInfoDto> result = new ArrayList<StreetNameInfoDto>(streetNamesInfo.size());
         for (StreetNameInfo streetNameInfo : streetNamesInfo) {
             StreetNameInfoDto streetNameInfoDto = streetNameInfoConverter.convertToStreetNameInfoDto(streetNameInfo);
@@ -89,7 +89,7 @@ public class StreetServiceImpl implements StreetService {
     }
 
     @Override
-    public void removeStreetNameInfo(int id) {
+    public void removeStreetNameInfo(long id) {
         streetNameInfoDao.deleteById(id);
     }
 }

@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class CityDto {
 
-    private int id;
+    private long id;
     private String name;
     private int population;
     private CountryDto countryDto;
@@ -22,11 +22,11 @@ public class CityDto {
         return population;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

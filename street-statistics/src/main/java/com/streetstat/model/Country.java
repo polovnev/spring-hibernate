@@ -10,7 +10,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name="country")
 public class Country implements Serializable{
-    private int id;
+    private long id;
     private String name;
     private int population;
     private Set<City> cities;
@@ -19,11 +19,11 @@ public class Country implements Serializable{
     @Id
     @GeneratedValue(strategy=IDENTITY)
     @Column(name="country_id")
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

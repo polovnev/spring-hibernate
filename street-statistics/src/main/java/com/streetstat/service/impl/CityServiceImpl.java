@@ -29,20 +29,20 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public CityDto getCityDtoById(int id) {
-        City city = (City) cityDao.getById(id);
+    public CityDto getCityDtoById(long id) {
+        City city = (City) cityDao.findById(id,"");
         CityDto cityDto = cityConverter.convertToCityDto(city);
         return cityDto;
     }
 
     @Override
-    public City getCityById(int id) {
-        return (City) cityDao.getById(id);
+    public City getCityById(long id) {
+        return (City) cityDao.findById(id,"");
     }
 
     @Override
     public List<CityDto> getAllCityDtos() {
-        List<City> cityList = cityDao.getAll();
+        List<City> cityList = cityDao.getCities(0,100);
         List<CityDto> result = new ArrayList<CityDto>(cityList.size());
         for (City city : cityList) {
             CityDto cityDto = cityConverter.convertToCityDto(city);
@@ -52,7 +52,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public List<CityDto> getCitiesByCountry(int id) {
+    public List<CityDto> getCitiesByCountry(long id) {
         Set<City> citySet = cityDao.getAllCityForCountry(id);
         List<CityDto> result = new ArrayList<CityDto>(citySet.size());
         for (City city : citySet) {
@@ -62,25 +62,25 @@ public class CityServiceImpl implements CityService {
         return result;
     }
 
-    public void removeCity(int id) {
+    public void removeCity(long id) {
         cityDao.deleteById(id);
     }
 
 
     @Override
-    public CityDto showCityThisSumLongestStreet(int countryId) {
+    public CityDto showCityThisSumLongestStreet(long countryId) {
         City city = cityDao.showCityThisSumLongestStreet(countryId);
         return cityConverter.convertToCityDto(city);
     }
 
     @Override
-    public CityDto showCityThisBiggestPopulation(int countryId) {
+    public CityDto showCityThisBiggestPopulation(long countryId) {
         City city = cityDao.showCityThisBiggerstPopulation(countryId);
         return cityConverter.convertToCityDto(city);
     }
 
     @Override
-    public CityDto showCityThisSmallestPopulation(int countryId) {
+    public CityDto showCityThisSmallestPopulation(long countryId) {
         City city = cityDao.showCityThisSmallestPopulation(countryId);
         return cityConverter.convertToCityDto(city);
     }

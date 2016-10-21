@@ -6,17 +6,19 @@ import com.streetstat.model.City;
 import java.util.List;
 import java.util.Set;
 
-public interface CityDao extends AbstractDao {
+public interface CityDao extends Dao {
 
-    Set<City> getAllCityForCountry(int idCountry);
+    Set<City> getAllCityForCountry(long idCountry);
 
-    List<City> getAllCityByStreetName(int idStreetName);
+    List<City> getAllCityByStreetName(long idStreetName);
 
-    City showCityThisSumLongestStreet(int countryId);
+    City showCityThisSumLongestStreet(long countryId);
 
-    City showCityThisBiggerstPopulation(int countryId);
+    City showCityThisBiggerstPopulation(long countryId);
 
-    City showCityThisSmallestPopulation(int countryId);
+    City showCityThisSmallestPopulation(long countryId);
+
+    List<City> getCities(int page, int pageSize);
 
 
 

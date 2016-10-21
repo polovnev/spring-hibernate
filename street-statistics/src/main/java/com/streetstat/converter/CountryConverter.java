@@ -17,7 +17,7 @@ public class CountryConverter {
     CityConverter cityConverter;
 
     public Country convertToCountry(CountryDto countryDTO) {
-        int id = countryDTO.getId();
+        long id = countryDTO.getId();
         String name = countryDTO.getName();
         int population = countryDTO.getPopulation();
         Set<CityDto> cityDtos = countryDTO.getCityDtos();
@@ -34,7 +34,7 @@ public class CountryConverter {
 
 
     public CountryDto convertToCountryDto(Country country) {
-        int id = country.getId();
+        long id = country.getId();
         String name = country.getName();
         int population = country.getPopulation();
         Set<City> cities = country.getCities();

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class StreetNameInfoConverter {
 
     public StreetNameInfo convertToStreetNameInfo(StreetNameInfoDto streetNameDTO) {
-        int id = streetNameDTO.getId();
+        long id = streetNameDTO.getId();
         String name = streetNameDTO.getName();
         int isPerson = (streetNameDTO.isPerson()) ? 1 : 0;
         String description = streetNameDTO.getDescription();
@@ -22,7 +22,7 @@ public class StreetNameInfoConverter {
     }
 
     public StreetNameInfoDto convertToStreetNameInfoDto(StreetNameInfo streetName) {
-        int id = streetName.getId();
+        long id = streetName.getId();
         String name = streetName.getName();
         StreetNameInfoDto result = new StreetNameInfoDto();
         String description = streetName.getDescription();

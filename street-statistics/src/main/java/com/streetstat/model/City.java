@@ -9,7 +9,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name="city")
 public class City implements Serializable{
-    private int id;
+    private long id;
     private String name;
     private Country country;
     private int population;
@@ -21,11 +21,11 @@ public class City implements Serializable{
     @Id
     @GeneratedValue(strategy=IDENTITY)
     @Column(name="city_id")
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

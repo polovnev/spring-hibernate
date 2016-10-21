@@ -8,7 +8,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name="street")
 public class Street implements Serializable{
-    private int id;
+    private long id;
     private City city;
     private StreetNameInfo streetNameInfo;
     private int length;
@@ -16,11 +16,11 @@ public class Street implements Serializable{
     @Id
     @GeneratedValue(strategy=IDENTITY)
     @Column(name="street_id")
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

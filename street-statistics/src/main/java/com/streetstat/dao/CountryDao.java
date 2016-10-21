@@ -1,6 +1,11 @@
 package com.streetstat.dao;
 
 
-public interface CountryDao extends AbstractDao {
+import com.streetstat.model.Country;
 
+import java.util.List;
+
+public interface CountryDao extends Dao {
+
+    List<Country> getCountries(int page, int pageSize);
 }

@@ -23,7 +23,7 @@ public class CityConverter {
     private StreetConverter streetConverter;
 
     public City convertToCity(CityDto cityDTO) {
-        int id = cityDTO.getId();
+        long id = cityDTO.getId();
         String name = cityDTO.getName();
         int population = cityDTO.getPopulation();
 
@@ -47,7 +47,7 @@ public class CityConverter {
 
 
     public CityDto convertToCityDto(City city) {
-        int id = city.getId();
+        long id = city.getId();
         String name = city.getName();
         Country country = city.getCountry();
         country.setCities(null);

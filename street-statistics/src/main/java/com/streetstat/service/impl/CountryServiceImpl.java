@@ -28,7 +28,7 @@ public class CountryServiceImpl implements CountryService {
     }
 
     public List<CountryDto> getAllCountriesDtos() {
-        List<Country> countryList = countryDao.getAll();
+        List<Country> countryList = countryDao.getCountries(0,100);
         List<CountryDto> result = new ArrayList<CountryDto>(countryList.size());
         for (Country country : countryList) {
             CountryDto countryDto = countryConverter.convertToCountryDto(country);
@@ -37,18 +37,18 @@ public class CountryServiceImpl implements CountryService {
         return result;
     }
 
-    public CountryDto getCountryDtoById(int id) {
-        Country country = (Country) countryDao.getById(id);
+    public CountryDto getCountryDtoById(long id) {
+        Country country = (Country) countryDao.findById(id,"");
         CountryDto countryDto = countryConverter.convertToCountryDto(country);
         return countryDto;
     }
 
-    public Country getCountryById(int id) {
-        Country country = (Country) countryDao.getById(id);
+    public Country getCountryById(long id) {
+        Country country = (Country) countryDao.findById(id,"");
         return country;
     }
 
-    public void removeCountry(int id) {
+    public void removeCountry(long id) {
         countryDao.deleteById(id);
     }
 

@@ -10,13 +10,13 @@ public interface CountryService {
 
     void saveCountry(CountryDto countryDto);
 
-    CountryDto getCountryDtoById(int id);
+    CountryDto getCountryDtoById(long id);
 
     List<CountryDto> getAllCountriesDtos();
 
-    void removeCountry(int id);
+    void removeCountry(long id);
 
-    Country getCountryById(int id);
+    Country getCountryById(long id);
 
 
 }

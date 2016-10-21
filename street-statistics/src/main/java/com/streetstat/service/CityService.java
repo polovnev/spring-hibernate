@@ -10,19 +10,19 @@ public interface CityService {
 
     void saveCity(CityDto cityDto);
 
-    CityDto getCityDtoById(int id);
+    CityDto getCityDtoById(long id);
 
-    City getCityById(int id);
+    City getCityById(long id);
 
     List<CityDto> getAllCityDtos();
 
-    List<CityDto> getCitiesByCountry(int id);
+    List<CityDto> getCitiesByCountry(long id);
 
-    void removeCity(int id);
+    void removeCity(long id);
 
-    CityDto showCityThisSumLongestStreet(int countryId);
+    CityDto showCityThisSumLongestStreet(long countryId);
 
-    CityDto showCityThisBiggestPopulation(int countryId);
+    CityDto showCityThisBiggestPopulation(long countryId);
 
-    CityDto showCityThisSmallestPopulation(int countryId);
+    CityDto showCityThisSmallestPopulation(long countryId);
 }

@@ -1,9 +1,8 @@
 package com.streetstat.dao.impl;
 
-
-import com.streetstat.dao.AbstractDao;
+import com.streetstat.dao.Dao;
+import com.streetstat.dao.util.HibernateInitializer;
 import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,53 +11,66 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional
 @Repository
-abstract class AbstractDaoImpl<T> implements AbstractDao {
+public abstract class AbstractDaoImpl<T> implements Dao<T> {
 
     @Autowired
     private SessionFactory sessionFactory;
 
-    Session getSession() {
-        return sessionFactory.getCurrentSession();
-    }
-
     private Class<T> persistentClass;
 
-    protected AbstractDaoImpl(Class<T> persistentClass) {
+    public AbstractDaoImpl(Class<T> persistentClass) {
         this.persistentClass = persistentClass;
     }
 
-    @Transactional
-    @Override
-    public void saveOrUpdate(Object o) {
-        getSession().saveOrUpdate(o);
+    public Session getSession() {
+        return sessionFactory.getCurrentSession();
     }
 
-
-    @Transactional
-    @Override
-    public void deleteById(int id) {
-        T removeObject = getById(id);
-        getSession().delete(removeObject);
-
+    public Class<T> getPersistentClass() {
+        return persistentClass;
     }
 
-    @Transactional
     @Override
-    public T getById(int id) {
-        T objectFromDB = (T) getSession().load(persistentClass, id);
-        if (objectFromDB != null)
-            Hibernate.initialize(objectFromDB);
-        return objectFromDB;
+    @SuppressWarnings("unchecked")
+    @Transactional(readOnly = true)
+    public T findById(Long id, String... properties) {
+        T entity = (T) getSession().get(getPersistentClass(), id);
+        HibernateInitializer.initializeEntities(entity, properties);
+        return entity;
     }
 
-    @Transactional
     @Override
-    public List<T> getAll() {
+    @Transactional
+    public void saveOrUpdate(T entity) {
+        getSession().saveOrUpdate(entity);
+    }
+
+    @Override
+    @Transactional
+    public void delete(T entity) {
+        getSession().delete(entity);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
         Session session = getSession();
-        Criteria criteria = session.createCriteria(persistentClass);
-        List<T> list = (List<T>) criteria.list();
-        return list;
+        Object obj = session.get(getPersistentClass(), id);
+        if (obj != null) {
+            session.delete(obj);
+        }
     }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public T merge(T entity) {
+        return (T) getSession().merge(entity);
+    }
+
+    @Override
+    public Long add(T entity) {
+        return (Long) getSession().save(entity);
+    }
+
 }

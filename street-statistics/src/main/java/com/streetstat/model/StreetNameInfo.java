@@ -11,7 +11,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Table(name="street_name_info")
 public class StreetNameInfo implements Serializable{
 
-    private int id;
+    private long id;
     private String name;
     private int isPerson;
     private String description;
@@ -20,11 +20,11 @@ public class StreetNameInfo implements Serializable{
     @Id
     @GeneratedValue(strategy=IDENTITY)
     @Column(name="street_name_info_id")
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

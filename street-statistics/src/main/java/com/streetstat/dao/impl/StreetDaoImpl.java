@@ -1,6 +1,7 @@
 package com.streetstat.dao.impl;
 
 import com.streetstat.dao.StreetDao;
+import com.streetstat.dao.util.HibernateInitializer;
 import com.streetstat.model.City;
 import com.streetstat.model.Street;
 import org.hibernate.Criteria;
@@ -21,13 +22,12 @@ public class StreetDaoImpl extends AbstractDaoImpl implements StreetDao {
     }
 
     @Override
-    public Set<Street> getStreetsForCityId(int idCity) {
+    public Set<Street> getStreetsForCityId(long idCity) {
         Session session = getSession();
         Criteria criteria = session.createCriteria(City.class);
         City city = (City) criteria.add(Expression.eq("id", idCity)).uniqueResult();
-        Set<Street> streets = city.getStreets();
-        streets.size();
-        return streets;
+        HibernateInitializer.initializeEntities(city,"streets");
+        return city.getStreets();
     }
 
 
