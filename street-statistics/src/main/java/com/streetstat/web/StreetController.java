@@ -1,10 +1,10 @@
-package com.streetstat.controller;
+package com.streetstat.web;
 
-import com.streetstat.dto.CityDto;
-import com.streetstat.dto.StreetDto;
-import com.streetstat.dto.StreetNameInfoDto;
-import com.streetstat.service.CityService;
-import com.streetstat.service.StreetService;
+import com.streetstat.facade.CityFacade;
+import com.streetstat.facade.StreetFacade;
+import com.streetstat.facade.dto.CityDto;
+import com.streetstat.facade.dto.StreetDto;
+import com.streetstat.facade.dto.StreetNameInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,10 +21,10 @@ import java.util.List;
 public class StreetController {
 
     @Autowired
-    private StreetService streetService;
+    private StreetFacade streetFacade;
 
     @Autowired
-    private CityService cityService;
+    private CityFacade cityFacade;
 
 
     @RequestMapping(value = "/street/add", method = RequestMethod.POST)
@@ -39,14 +39,14 @@ public class StreetController {
         streetDto.setStreetNameInfoDto(streetNameInfoDto);
 
         streetDto.setLength(length);
-        streetService.saveStreet(streetDto);
+        streetFacade.saveStreet(streetDto);
         return new ModelAndView("redirect:/country/show");
     }
 
     @RequestMapping(value = "/street/add", method = RequestMethod.GET)
     public String addStreet(ModelMap modelMap) {
-        List<CityDto> cities = cityService.getAllCityDtos();
-        List<StreetNameInfoDto> streetNames = streetService.getAllStreetNamesInfoDtos();
+        List<CityDto> cities = cityFacade.getAllCityDtos();
+        List<StreetNameInfoDto> streetNames = streetFacade.getAllStreetNamesInfoDtos();
         modelMap.put("cities", cities);
         modelMap.put("streetNames", streetNames);
         return "add/addStreet";
@@ -54,16 +54,16 @@ public class StreetController {
 
     @RequestMapping(value = "/street/show", method = RequestMethod.GET)
     public String showStreets(@RequestParam("idCity") int idCity, ModelMap model) {
-        List<StreetDto> streets = streetService.getStreetsByCity(idCity);
+        List<StreetDto> streets = streetFacade.getStreetDtosByCity(idCity);
         model.addAttribute("streets", streets);
         return "show/showStreets";
     }
 
     @RequestMapping(value = "/street/update", method = RequestMethod.GET)
     public String updateStreet(@RequestParam("id") int id, ModelMap modelMap) {
-        StreetDto street = streetService.getStreetDtoById(id);
-        List<CityDto> cities = cityService.getAllCityDtos();
-        List<StreetNameInfoDto> streetNames = streetService.getAllStreetNamesInfoDtos();
+        StreetDto street = streetFacade.getStreetDtoById(id);
+        List<CityDto> cities = cityFacade.getAllCityDtos();
+        List<StreetNameInfoDto> streetNames = streetFacade.getAllStreetNamesInfoDtos();
         modelMap.put("street", street);
         modelMap.put("cities", cities);
         modelMap.put("streetNames", streetNames);
@@ -83,14 +83,14 @@ public class StreetController {
         streetNameInfoDto.setId(streetNameInfo);
         streetDTO.setStreetNameInfoDto(streetNameInfoDto);
         streetDTO.setLength(length);
-        streetService.saveStreet(streetDTO);
+        streetFacade.saveStreet(streetDTO);
         return new ModelAndView("redirect:/country/show");
 
     }
 
     @RequestMapping(value = "/street/remove", method = RequestMethod.GET)
     public ModelAndView removeStreet(@RequestParam("id") int id) {
-        streetService.removeStreet(id);
+        streetFacade.removeStreet(id);
         return new ModelAndView("redirect:/country/show");
     }
 
@@ -102,7 +102,7 @@ public class StreetController {
         streetNameInfoDto.setName(street_name);
         streetNameInfoDto.setPerson(isPerson);
         streetNameInfoDto.setDescription(description);
-        streetService.saveStreetNameInfo(streetNameInfoDto);
+        streetFacade.saveStreetNameInfoDto(streetNameInfoDto);
         return new ModelAndView("redirect:/country/show");
     }
 
@@ -113,20 +113,20 @@ public class StreetController {
 
     @RequestMapping(value = "/streetNameInfo/show", method = RequestMethod.GET)
     public String showStreetNames(ModelMap model) {
-        List<StreetNameInfoDto> streetNames = streetService.getAllStreetNamesInfoDtos();
+        List<StreetNameInfoDto> streetNames = streetFacade.getAllStreetNamesInfoDtos();
         model.addAttribute("streetNames", streetNames);
         return "show/showStreetNames";
     }
 
     @RequestMapping(value = "/streetNameInfo/remove", method = RequestMethod.GET)
     public ModelAndView removeStreetName(@RequestParam("id") int id) {
-        streetService.removeStreetNameInfo(id);
+        streetFacade.removeStreetNameInfo(id);
         return new ModelAndView("redirect:/country/show");
     }
 
     @RequestMapping(value = "/streetNameInfo/update", method = RequestMethod.GET)
     public String updateStreetName(@RequestParam("id") int id, ModelMap modelMap) {
-        StreetNameInfoDto streetName = streetService.getStreetNameInfoDtoById(id);
+        StreetNameInfoDto streetName = streetFacade.getStreetNameInfoDtoById(id);
         modelMap.put("streetNameInfo", streetName);
         return "change/changeStreetName";
     }
@@ -140,7 +140,7 @@ public class StreetController {
         streetNameInfoDto.setName(street_name);
         streetNameInfoDto.setPerson(isPerson);
         streetNameInfoDto.setDescription(description);
-        streetService.saveStreetNameInfo(streetNameInfoDto);
+        streetFacade.saveStreetNameInfoDto(streetNameInfoDto);
         return new ModelAndView("redirect:/country/show");
     }
 }

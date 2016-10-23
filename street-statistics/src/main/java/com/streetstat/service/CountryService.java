@@ -1,22 +1,20 @@
 package com.streetstat.service;
 
 
-import com.streetstat.dto.CountryDto;
+import com.streetstat.facade.dto.CountryDto;
 import com.streetstat.model.Country;
 
 import java.util.List;
 
 public interface CountryService {
 
-    void saveCountry(CountryDto countryDto);
-
-    CountryDto getCountryDtoById(long id);
-
-    List<CountryDto> getAllCountriesDtos();
-
-    void removeCountry(long id);
+    void saveCountry(Country country);
 
     Country getCountryById(long id);
+
+    List<Country> getAllCountries();
+
+    void removeCountry(long id);
 
 
 }

@@ -1,7 +1,9 @@
-package com.streetstat.controller;
+package com.streetstat.web;
 
-import com.streetstat.dto.CityDto;
-import com.streetstat.dto.CountryDto;
+import com.streetstat.facade.CityFacade;
+import com.streetstat.facade.CountryFacade;
+import com.streetstat.facade.dto.CityDto;
+import com.streetstat.facade.dto.CountryDto;
 import com.streetstat.service.CityService;
 import com.streetstat.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +17,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/city")
 public class CityController {
 
     @Autowired
-    private CityService cityService;
+    private CityFacade cityFacade;
 
     @Autowired
-    private CountryService countryService;
+    private CountryFacade countryFacade;
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView addCity(@RequestParam("country") int countryId, @RequestParam("city_name") String city_name, @RequestParam("population") int population) {
@@ -34,26 +37,26 @@ public class CityController {
         countryDto.setId(countryId);
         cityDto.setCountryDto(countryDto);
         cityDto.setPopulation(population);
-        cityService.saveCity(cityDto);
+        cityFacade.saveCity(cityDto);
         return new ModelAndView("redirect:/country/show");
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addCity(ModelMap modelMap) {
-        List<CountryDto> countryList = countryService.getAllCountriesDtos();
+        List<CountryDto> countryList = countryFacade.getAllCountriesDtos();
         modelMap.put("countries", countryList);
         return "add/addCity";
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.GET)
     public String removeCity(@RequestParam("id") int id) {
-        cityService.removeCity(id);
+        cityFacade.removeCity(id);
         return "show/showCountry";
     }
 
     @RequestMapping(value = "/show", method = RequestMethod.GET)
     public String showCities(@RequestParam("idCountry") int idCountry, ModelMap model) {
-        List<CityDto> cities = cityService.getCitiesByCountry(idCountry);
+        Set<CityDto> cities = cityFacade.getCityDtosByCountry(idCountry);
         model.addAttribute("cities", cities);
         return "show/showCities";
     }
@@ -67,14 +70,14 @@ public class CityController {
         countryDto.setId(countryId);
         cityDto.setCountryDto(countryDto);
         cityDto.setPopulation(population);
-        cityService.saveCity(cityDto);
+        cityFacade.saveCity(cityDto);
         return new ModelAndView("redirect:/country/show");
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String updateCity(@RequestParam("id") int id, ModelMap modelMap) {
-        CityDto city = cityService.getCityDtoById(id);
-        List<CountryDto> countryList = countryService.getAllCountriesDtos();
+        CityDto city = cityFacade.getCityDtoById(id);
+        List<CountryDto> countryList = countryFacade.getAllCountriesDtos();
         modelMap.put("city", city);
         modelMap.put("countries", countryList);
         return "change/changeCity";
@@ -83,22 +86,22 @@ public class CityController {
     @ResponseBody
     @RequestMapping(value = "/sumLongestStreet", method = RequestMethod.GET)
     public String showCityThisSumLongestStreet(@RequestParam("idCountry") int id) {
-        CityDto result = cityService.showCityThisSumLongestStreet(id);
-        return result.getName();
+        CityDto cityDto = cityFacade.showCityDtoThisSumLongestStreet(id);
+        return cityDto.getName();
     }
 
     @ResponseBody
     @RequestMapping(value = "/biggestPopulation", method = RequestMethod.GET)
     public String showCityThisBiggerstPopulation(@RequestParam("idCountry") int id) {
-        CityDto result = cityService.showCityThisBiggestPopulation(id);
-        return result.getName();
+        CityDto cityDto = cityFacade.showCityDtoThisBiggestPopulation(id);
+        return cityDto.getName();
     }
 
     @ResponseBody
     @RequestMapping(value = "/smallestPopulation", method = RequestMethod.GET)
     public String showCityThisSmallestPopulation(@RequestParam("idCountry") int id) {
-        CityDto result = cityService.showCityThisSmallestPopulation(id);
-        return result.getName();
+        CityDto cityDto = cityFacade.showCityDtoThisSmallestPopulation(id);
+        return cityDto.getName();
     }
 
 }

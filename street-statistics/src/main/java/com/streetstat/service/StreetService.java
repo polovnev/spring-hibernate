@@ -1,29 +1,28 @@
 package com.streetstat.service;
 
-import com.streetstat.dto.StreetDto;
-import com.streetstat.dto.StreetNameInfoDto;
+
+import com.streetstat.model.Street;
 import com.streetstat.model.StreetNameInfo;
 
 import java.util.List;
+import java.util.Set;
 
 
 public interface StreetService {
 
-    void saveStreet(StreetDto streetDto);
+    void saveStreet(Street street);
 
-    StreetDto getStreetDtoById(long id);
+    Street getStreetById(long id);
 
-    List<StreetDto> getStreetsByCity(long id);
+    Set<Street> getStreetsByCity(long id);
 
     void removeStreet(long id);
 
-    void saveStreetNameInfo(StreetNameInfoDto streetNameInfoDto);
-
-    StreetNameInfoDto getStreetNameInfoDtoById(long id);
+    void saveStreetNameInfo(StreetNameInfo streetNameInfo);
 
     StreetNameInfo getStreetNameInfoById(long id);
 
-    List<StreetNameInfoDto> getAllStreetNamesInfoDtos();
+    List<StreetNameInfo> getAllStreetNamesInfos();
 
     void removeStreetNameInfo(long id);
 

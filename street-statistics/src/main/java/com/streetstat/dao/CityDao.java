@@ -21,5 +21,4 @@ public interface CityDao extends Dao {
     List<City> getCities(int page, int pageSize);
 
 
-
 }

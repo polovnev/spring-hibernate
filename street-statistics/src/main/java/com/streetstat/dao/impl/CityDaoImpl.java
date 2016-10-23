@@ -38,15 +38,15 @@ public class CityDaoImpl extends AbstractDaoImpl implements CityDao {
     @Override
     public List<City> getAllCityByStreetName(long idStreetName) {
         Session session = getSession();
-        List<City> result = new ArrayList<City>();
+        List<City> cities = new ArrayList<City>();
         Criteria criteria = session.createCriteria(StreetNameInfo.class);
         StreetNameInfo streetName = (StreetNameInfo) criteria.add(Expression.eq("id", idStreetName)).uniqueResult();
         Set<Street> streets = streetName.getStreets();
 
         for (Street street : streets) {
-            result.add(street.getCity());
+            cities.add(street.getCity());
         }
-        return result;
+        return cities;
     }
 
     @Override

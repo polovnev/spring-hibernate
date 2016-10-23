@@ -1,6 +1,7 @@
-package com.streetstat.controller;
+package com.streetstat.web;
 
-import com.streetstat.dto.CountryDto;
+import com.streetstat.facade.CountryFacade;
+import com.streetstat.facade.dto.CountryDto;
 import com.streetstat.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,7 @@ import java.util.List;
 public class CountryController {
 
     @Autowired
-    private CountryService countryService;
+    private CountryFacade countryFacade;
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addCountry() {
@@ -30,13 +31,13 @@ public class CountryController {
         CountryDto countryDTO = new CountryDto();
         countryDTO.setName(country_name);
         countryDTO.setPopulation(population);
-        countryService.saveCountry(countryDTO);
+        countryFacade.saveCountry(countryDTO);
         return new ModelAndView("redirect:/country/show");
     }
 
     @RequestMapping(value = {"/show",""}, method = RequestMethod.GET)
     public String showCountries(ModelMap model) {
-        List<CountryDto> countries = countryService.getAllCountriesDtos();
+        List<CountryDto> countries = countryFacade.getAllCountriesDtos();
         model.addAttribute("countries", countries);
         return "show/showCountry";
     }
@@ -47,20 +48,20 @@ public class CountryController {
         countryDTO.setId(id);
         countryDTO.setName(country_name);
         countryDTO.setPopulation(population);
-        countryService.saveCountry(countryDTO);
+        countryFacade.saveCountry(countryDTO);
         return new ModelAndView("redirect:/country/show");
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String updateCountry(@RequestParam("id") int id, ModelMap modelMap) {
-        CountryDto country = countryService.getCountryDtoById(id);
+        CountryDto country = countryFacade.getCountryDtoById(id);
         modelMap.put("country", country);
         return "change/changeCountry";
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.GET)
     public ModelAndView removeCountry(@RequestParam("id") int id) {
-        countryService.removeCountry(id);
+        countryFacade.removeCountry(id);
         return new ModelAndView("redirect:/country/show");
     }
 }

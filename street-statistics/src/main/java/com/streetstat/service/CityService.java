@@ -1,28 +1,27 @@
 package com.streetstat.service;
 
 
-import com.streetstat.dto.CityDto;
+import com.streetstat.facade.dto.CityDto;
 import com.streetstat.model.City;
 
 import java.util.List;
+import java.util.Set;
 
 public interface CityService {
 
-    void saveCity(CityDto cityDto);
-
-    CityDto getCityDtoById(long id);
+    void saveCity(City city);
 
     City getCityById(long id);
 
-    List<CityDto> getAllCityDtos();
+    List<City> getAllCity();
 
-    List<CityDto> getCitiesByCountry(long id);
+    Set<City> getCitiesByCountry(long id);
 
     void removeCity(long id);
 
-    CityDto showCityThisSumLongestStreet(long countryId);
+    City showCityThisSumLongestStreet(long countryId);
 
-    CityDto showCityThisBiggestPopulation(long countryId);
+    City showCityThisBiggestPopulation(long countryId);
 
-    CityDto showCityThisSmallestPopulation(long countryId);
+    City showCityThisSmallestPopulation(long countryId);
 }

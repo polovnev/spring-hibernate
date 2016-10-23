@@ -2,7 +2,6 @@ package com.streetstat.dao.impl;
 
 import com.streetstat.dao.Dao;
 import com.streetstat.dao.util.HibernateInitializer;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

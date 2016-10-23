@@ -1,4 +1,4 @@
-package com.streetstat.dto;
+package com.streetstat.facade.dto;
 
 import java.util.Set;
 
