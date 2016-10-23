@@ -23,7 +23,7 @@ public class CityConverter {
     private StreetConverter streetConverter;
 
     public City convertToCity(CityDto cityDTO) {
-        if(cityDTO == null) {
+        if (cityDTO == null) {
             return null;
         }
         CountryDto countryDto = cityDTO.getCountryDto();
@@ -36,39 +36,52 @@ public class CityConverter {
         city.setName(cityDTO.getName());
         city.setCountry(country);
         city.setPopulation(cityDTO.getPopulation());
-        Set<Street> streets = getStreet(cityDTO.getStreetDtos());
+        Set<Street> streets = getStreet(cityDTO.getStreetDtos(), city);
         city.setStreets(streets);
         return city;
     }
 
     public CityDto convertToCityDto(City city) {
+        if(city == null) {
+            return null;
+        }
         CityDto cityDto = new CityDto();
         cityDto.setId(city.getId());
         cityDto.setName(city.getName());
         cityDto.setPopulation(city.getPopulation());
         CountryDto countryDto = countryConverter.convertToCountryDto(city.getCountry());
         cityDto.setCountryDto(countryDto);
-        Set<StreetDto> streetDtos = getStreetDtos(city.getStreets());
+        Set<StreetDto> streetDtos = getStreetDtos(city.getStreets(), cityDto);
         cityDto.setStreetDtos(streetDtos);
         return cityDto;
     }
 
-    private Set<StreetDto> getStreetDtos(Set<Street> streets) {
+    private Set<StreetDto> getStreetDtos(Set<Street> streets, CityDto cityDto) {
+        if (!Hibernate.isInitialized(streets)) {
+            return null;
+        }
         Set<StreetDto> streetDtos = new HashSet<StreetDto>();
-        if (streets != null && Hibernate.isInitialized(streets)) {
-            for (Street street : streets) {
-                StreetDto streetDto = streetConverter.convertToStreetDto(street);
-                streetDtos.add(streetDto);
-            }
+        for (Street street : streets) {
+            City city = street.getCity();
+            street.setCity(null);
+            StreetDto streetDto = streetConverter.convertToStreetDto(street);
+            streetDto.setCityDto(cityDto);
+            streetDtos.add(streetDto);
+            street.setCity(city);
         }
         return streetDtos;
     }
 
-    private Set<Street> getStreet(Set<StreetDto> streetDtos) {
+    private Set<Street> getStreet(Set<StreetDto> streetDtos, City city) {
+        if (streetDtos == null) {
+            return null;
+        }
         Set<Street> streets = new HashSet<Street>();
         if (streetDtos != null) {
             for (StreetDto streetDto : streetDtos) {
+                streetDto.setCityDto(null);
                 Street street = streetConverter.convertToStreet(streetDto);
+                street.setCity(city);
                 streets.add(street);
             }
         }

@@ -16,6 +16,9 @@ import java.util.Collection;
 public class HibernateInitializer {
 
     public static void initializeEntities(Object entity, String... properties) {
+        if(properties == null) {
+            return;
+        }
         for (String props: properties) {
             recursiveInitializeEntities(entity, props.split("\\."), 0);
         }

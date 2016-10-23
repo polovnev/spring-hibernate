@@ -15,26 +15,23 @@ public class CountryServiceImpl implements CountryService {
     private CountryDao countryDao;
 
 
-
     @Override
     public void saveCountry(Country country) {
         countryDao.saveOrUpdate(country);
     }
 
     public List<Country> getAllCountries() {
-        return countryDao.getCountries(0,100);
+        return countryDao.getCountries(0, 100);
     }
 
     public Country getCountryById(long id) {
-        Country country = (Country) countryDao.findById(id,"");
+        Country country = (Country) countryDao.findById(id, null);
         return country;
     }
 
     public void removeCountry(long id) {
         countryDao.deleteById(id);
     }
-
-
 
 
 }

@@ -33,7 +33,7 @@ public class StreetServiceImpl implements StreetService {
 
     @Override
     public Street getStreetById(long id) {
-        Street street = (Street) streetDao.findById(id, "");
+        Street street = (Street) streetDao.findById(id, null);
         return street;
     }
 
