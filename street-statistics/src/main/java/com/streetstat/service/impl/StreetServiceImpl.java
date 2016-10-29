@@ -53,7 +53,7 @@ public class StreetServiceImpl implements StreetService {
 
     @Override
     public StreetNameInfo getStreetNameInfoById(long id) {
-        return (StreetNameInfo) streetNameInfoDao.findById(id, "");
+        return (StreetNameInfo) streetNameInfoDao.findById(id, null);
     }
 
     @Override

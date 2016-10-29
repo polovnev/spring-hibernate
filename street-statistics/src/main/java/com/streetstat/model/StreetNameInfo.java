@@ -1,5 +1,7 @@
 package com.streetstat.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -13,7 +15,7 @@ public class StreetNameInfo implements Serializable{
 
     private long id;
     private String name;
-    private int isPerson;
+    private boolean isPerson;
     private String description;
     private Set<Street> streets;
 
@@ -38,11 +40,12 @@ public class StreetNameInfo implements Serializable{
     }
 
     @Column(name="isPerson")
-    public int getPerson() {
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    public boolean getPerson() {
         return isPerson;
     }
 
-    public void setPerson(int person) {
+    public void setPerson(boolean person) {
         isPerson = person;
     }
 

@@ -26,23 +26,18 @@ public class CityConverter {
         if (cityDTO == null) {
             return null;
         }
-        CountryDto countryDto = cityDTO.getCountryDto();
-        Country country = null;
-        if (countryDto != null) {
-            country = countryConverter.convertToCountry(countryDto);
-        }
         City city = new City();
+        city.setCountry(countryConverter.convertToCountry(cityDTO.getCountryDto()));
         city.setId(cityDTO.getId());
         city.setName(cityDTO.getName());
-        city.setCountry(country);
         city.setPopulation(cityDTO.getPopulation());
-        Set<Street> streets = getStreet(cityDTO.getStreetDtos(), city);
+        Set<Street> streets = getStreets(cityDTO.getStreetDtos(), city);
         city.setStreets(streets);
         return city;
     }
 
     public CityDto convertToCityDto(City city) {
-        if(city == null) {
+        if (city == null) {
             return null;
         }
         CityDto cityDto = new CityDto();
@@ -72,19 +67,18 @@ public class CityConverter {
         return streetDtos;
     }
 
-    private Set<Street> getStreet(Set<StreetDto> streetDtos, City city) {
+    private Set<Street> getStreets(Set<StreetDto> streetDtos, City city) {
         if (streetDtos == null) {
             return null;
         }
         Set<Street> streets = new HashSet<Street>();
-        if (streetDtos != null) {
-            for (StreetDto streetDto : streetDtos) {
-                streetDto.setCityDto(null);
-                Street street = streetConverter.convertToStreet(streetDto);
-                street.setCity(city);
-                streets.add(street);
-            }
+        for (StreetDto streetDto : streetDtos) {
+            streetDto.setCityDto(null);
+            Street street = streetConverter.convertToStreet(streetDto);
+            street.setCity(city);
+            streets.add(street);
         }
+
         return streets;
     }
 }

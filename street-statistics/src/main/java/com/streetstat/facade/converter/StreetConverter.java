@@ -20,23 +20,28 @@ public class StreetConverter {
     private StreetNameInfoConverter streetNameInfoConverter;
 
     public Street convertToStreet(StreetDto streetDTO) {
-        City city = cityConverter.convertToCity(streetDTO.getCityDto());
-        StreetNameInfo streetNameInfo = streetNameInfoConverter.convertToStreetNameInfo(streetDTO.getStreetNameInfoDto());
+        if(streetDTO == null) {
+            return null;
+        }
         Street street = new Street();
         street.setId(streetDTO.getId());
+        City city = cityConverter.convertToCity(streetDTO.getCityDto());
         street.setCity(city);
+        StreetNameInfo streetNameInfo = streetNameInfoConverter.convertToStreetNameInfo(streetDTO.getStreetNameInfoDto());
         street.setStreetNameInfo(streetNameInfo);
         street.setLength(streetDTO.getLength());
         return street;
     }
 
     public StreetDto convertToStreetDto(Street street) {
-        StreetNameInfo streetNameInfo = street.getStreetNameInfo();
+        if(street == null) {
+            return null;
+        }
         StreetDto streetDto = new StreetDto();
         streetDto.setId(street.getId());
         CityDto cityDto = cityConverter.convertToCityDto(street.getCity());
         streetDto.setCityDto(cityDto);
-        StreetNameInfoDto streetNameInfoDto = streetNameInfoConverter.convertToStreetNameInfoDto(streetNameInfo);
+        StreetNameInfoDto streetNameInfoDto = streetNameInfoConverter.convertToStreetNameInfoDto(street.getStreetNameInfo());
         streetDto.setStreetNameInfoDto(streetNameInfoDto);
         streetDto.setLength(street.getLength());
         return streetDto;
